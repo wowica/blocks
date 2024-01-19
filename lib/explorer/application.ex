@@ -1,6 +1,4 @@
 defmodule Explorer.Application do
-  # See https://hexdocs.pm/elixir/Application.html
-  # for more information on OTP Applications
   @moduledoc false
 
   use Application
@@ -11,16 +9,11 @@ defmodule Explorer.Application do
       ExplorerWeb.Telemetry,
       {DNSCluster, query: Application.get_env(:explorer, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Explorer.PubSub},
-      # Start the Finch HTTP client for sending emails
       {Finch, name: Explorer.Finch},
-      # Start a worker by calling: Explorer.Worker.start_link(arg)
-      # {Explorer.Worker, arg},
-      # Start to serve requests, typically the last entry
+      {Explorer.ChainSyncClient, url: ogmios_connection_url()},
       ExplorerWeb.Endpoint
     ]
 
-    # See https://hexdocs.pm/elixir/Supervisor.html
-    # for other strategies and supported options
     opts = [strategy: :one_for_one, name: Explorer.Supervisor]
     Supervisor.start_link(children, opts)
   end
@@ -31,5 +24,9 @@ defmodule Explorer.Application do
   def config_change(changed, _new, removed) do
     ExplorerWeb.Endpoint.config_change(changed, removed)
     :ok
+  end
+
+  defp ogmios_connection_url() do
+    System.fetch_env!("OGMIOS_URL")
   end
 end

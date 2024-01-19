@@ -17,7 +17,7 @@ defmodule ExplorerWeb.Router do
   scope "/", ExplorerWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", DashboardLive
   end
 
   # Other scopes may use custom stacks.

@@ -1,31 +1,29 @@
-<header class="px-4 sm:px-6 lg:px-8">
+<header class="hidden md:block px-4 sm:px-6 lg:px-8">
   <div class="flex items-center justify-between border-b border-zinc-100 py-3 text-sm">
     <div class="flex items-center gap-4">
-      <a href="/">
-        <img src={~p"/images/logo.svg"} width="36" />
-      </a>
-      <p class="bg-brand/5 text-brand rounded-full px-2 font-medium leading-6">
-        v<%= Application.spec(:phoenix, :vsn) %>
+      <Heroicons.globe_alt width="36" />
+      <span class="font-bold">Cardano Block Explorer</span>
+      <p class="text-[#50fa7b] font-medium">
+        by <a href="https://junglestakepool.com" target="_blank">JUNGLE Stake Pool</a>
       </p>
-    </div>
-    <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
-      <a href="https://twitter.com/elixirphoenix" class="hover:text-zinc-700">
-        @elixirphoenix
-      </a>
-      <a href="https://github.com/phoenixframework/phoenix" class="hover:text-zinc-700">
-        GitHub
-      </a>
-      <a
-        href="https://hexdocs.pm/phoenix/overview.html"
-        class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
-      >
-        Get Started <span aria-hidden="true">&rarr;</span>
-      </a>
     </div>
   </div>
 </header>
-<main class="px-4 py-20 sm:px-6 lg:px-8">
-  <div class="mx-auto max-w-2xl">
+
+<header class="sm:block md:hidden">
+  <div class="sm:hidden" id="mobile-menu">
+    <div class="space-x-15 pb-3 m-3 flex items-center">
+      <Heroicons.globe_alt width="26" />
+      <span class="font-bold ml-2">Cardano Block Explorer</span>
+      <p class="text-[#50fa7b] text-xs ml-3">
+        by <a href="https://junglestakepool.com" target="_blank"><b>JUNGLE</b> Stake Pool</a>
+      </p>
+    </div>
+  </div>
+</header>
+
+<main class="md:px-4 md:py-20 sm:px-6 lg:px-8">
+  <div class="mx-auto max-w-3xl">
     <.flash_group flash={@flash} />
     <%= @inner_content %>
   </div>
