@@ -8,3 +8,10 @@ A Cardano Block explorer written in Phoenix LiveView.
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
+## Running in Docker
+
+A Docker compose file is available to allow running the application using the following command:
+
+```
+OGMIOS_URL="..." docker-compose up
+```

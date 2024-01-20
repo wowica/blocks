@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    environment:
+      - OGMIOS_URL=${OGMIOS_URL}
+      - SECRET_KEY_BASE=${SECRET_KEY_BASE-:"azhH3WdlZKdzE1U7e39hRck2yRw+ggijGk9eqReVZKa1EUqNcK/9yfX9gUE/GuVn"}
+      - PHX_HOST="localhost"

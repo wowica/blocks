@@ -38,16 +38,19 @@ if config_env() == :prod do
 
   config :explorer, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
+  # TODO: Remove hacks to run locally
   config :explorer, ExplorerWeb.Endpoint,
-    url: [host: host, port: 443, scheme: "https"],
-    http: [
-      # Enable IPv6 and bind on all interfaces.
-      # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
-      # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
-      # for details about using IPv6 vs IPv4 and loopback vs public addresses.
-      ip: {0, 0, 0, 0, 0, 0, 0, 0},
-      port: port
-    ],
+    url: [host: host, port: 443, scheme: "http"],
+    # http: [
+    #   # Enable IPv6 and bind on all interfaces.
+    #   # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
+    #   # See the documentation on https://hexdocs.pm/plug_cowboy/Plug.Cowboy.html
+    #   # for details about using IPv6 vs IPv4 and loopback vs public addresses.
+    #   ip: {0, 0, 0, 0, 0, 0, 0, 0},
+    #   port: port
+    # ],
+    http: [ip: {0, 0, 0, 0}, port: 4000],
+    check_origin: false,
     secret_key_base: secret_key_base
 
   # ## SSL Support

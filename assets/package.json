@@ -1,5 +1,12 @@
 {
+  "scripts": {
+    "deploy": "esbuild js/app.js --minify --bundle --target=es2017 --sourcemap=external --outdir=../priv/static/assets"
+  },
   "dependencies": {
-    "tailwind-dracula": "^1.1.0"
+    "tailwind-dracula": "^1.1.0",
+    "esbuild": "0.18.10",
+    "phoenix": "file:../deps/phoenix",
+    "phoenix_html": "file:../deps/phoenix_html",
+    "phoenix_live_view": "file:../deps/phoenix_live_view"
   }
 }
