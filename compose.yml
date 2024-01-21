@@ -9,4 +9,6 @@ services:
     environment:
       - OGMIOS_URL=${OGMIOS_URL}
       - SECRET_KEY_BASE=${SECRET_KEY_BASE-:"azhH3WdlZKdzE1U7e39hRck2yRw+ggijGk9eqReVZKa1EUqNcK/9yfX9gUE/GuVn"}
-      - PHX_HOST="localhost"
+      - PHX_HOST="blocks.workwithcardano.com"
+      - PHX_PORT=443
+      - PHX_SCHEME="https"
