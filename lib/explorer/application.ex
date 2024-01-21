@@ -10,6 +10,7 @@ defmodule Explorer.Application do
       {DNSCluster, query: Application.get_env(:explorer, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: Explorer.PubSub},
       {Finch, name: Explorer.Finch},
+      Explorer.BlocksDb,
       {Explorer.ChainSyncClient, url: ogmios_connection_url()},
       ExplorerWeb.Endpoint
     ]

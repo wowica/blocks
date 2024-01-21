@@ -1,4 +1,6 @@
 defmodule Explorer.Dashboard do
+  alias Explorer.BlocksDb
+
   @pub_sub Explorer.PubSub
   @new_blocks "new-blocks"
 
@@ -12,40 +14,6 @@ defmodule Explorer.Dashboard do
 
   @spec load_existing_blocks() :: list()
   def load_existing_blocks do
-    # TODO: replace with real data
-    [
-      %{
-        block_id: "123123",
-        block_height: "123123",
-        ada_output: "123123",
-        fees: "123123",
-        block_size: "92992",
-        tx_count: 123
-      },
-      %{
-        block_id: "123124",
-        block_height: "123123",
-        ada_output: "123123",
-        fees: "123123",
-        block_size: "92992",
-        tx_count: 123
-      },
-      %{
-        block_id: "123125",
-        block_height: "123123",
-        ada_output: "123123",
-        fees: "123123",
-        block_size: "92992",
-        tx_count: 123
-      },
-      %{
-        block_id: "123126",
-        block_height: "123123",
-        ada_output: "123123",
-        fees: "123123",
-        block_size: "92992",
-        tx_count: 123
-      }
-    ]
+    BlocksDb.get_all_blocks()
   end
 end

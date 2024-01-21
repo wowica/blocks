@@ -1,6 +1,7 @@
 defmodule ExplorerWeb.DashboardLive do
   use ExplorerWeb, :live_view
 
+  alias Explorer.BlocksDb
   alias Explorer.Dashboard
 
   @impl true
@@ -51,6 +52,8 @@ defmodule ExplorerWeb.DashboardLive do
       ada_output: ada_output,
       fees: fees
     }
+
+    BlocksDb.add_block(new_block)
 
     send(self(), :reset_counter)
 

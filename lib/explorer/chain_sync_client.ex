@@ -12,6 +12,7 @@ defmodule Explorer.ChainSyncClient do
   @impl true
   def handle_block(block, state) do
     Dashboard.broadcast_new_block(block)
+
     {:ok, :next_block, state}
   end
 end
