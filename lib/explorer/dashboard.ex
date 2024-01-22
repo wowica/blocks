@@ -44,7 +44,7 @@ defmodule Explorer.Dashboard do
 
     new_block = %{
       block_id: block["id"],
-      block_size: block["size"]["bytes"],
+      block_size: Decimal.div(block["size"]["bytes"], 1000) |> Decimal.round(1) |> to_string,
       block_height: block["height"],
       issuer: block["issuer"],
       tx_count: Enum.count(block["transactions"]),

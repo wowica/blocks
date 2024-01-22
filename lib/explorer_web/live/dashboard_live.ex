@@ -71,10 +71,7 @@ defmodule ExplorerWeb.DashboardLive do
               Block (Height)
             </th>
             <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
-              ID
-            </th>
-            <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
-              Size
+              Size (Kb)
             </th>
             <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
               Tx Count
@@ -95,9 +92,6 @@ defmodule ExplorerWeb.DashboardLive do
           >
             <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
               <%= block.block_height %>
-            </td>
-            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
-              <%= String.slice(block.block_id, 0..7) %>
             </td>
             <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
               <%= block.block_size %>
