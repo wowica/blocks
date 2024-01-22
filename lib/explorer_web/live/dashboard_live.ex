@@ -48,23 +48,23 @@ defmodule ExplorerWeb.DashboardLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="hidden md:block md:flex items-center justify-between py-3 text-sm">
-      <h2 class="inline-block text-2xl sm:text-3xl font-extrabold tracking-tight text-slate-200 mb-10">
+    <div class="flex flex-row items-center justify-between mb-10 text-sm">
+      <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-slate-200 mb-4">
         Latest Blocks
       </h2>
 
-      <div class="ml-auto flex flex-col">
-        <span class="inline-block sm:text-lg font-extrabold tracking-tight text-slate-200 w-max">
+      <div class="mt-2 md:mt-0 md:ml-auto flex flex-col items-center md:items-start">
+        <span class="sm:text-sm md:text-lg font-bold tracking-tight text-slate-200 w-max">
           Last updated
         </span>
-        <span phx-hook="timer" id="timer-1" class="last-updated sm:text-sml text-slate-200">
+        <span phx-hook="timer" id="timer-1" class="last-updated text-sml text-slate-200">
           0 seconds ago
         </span>
       </div>
     </div>
 
-    <div class="hidden md:block relative rounded-xl overflow-auto">
-      <table class="border-collapse table-auto w-full text-sm">
+    <div class="block md:block relative rounded-xl overflow-auto">
+      <table class="border-collapse table-auto w-full text-xs md:text-sm">
         <thead>
           <tr>
             <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
