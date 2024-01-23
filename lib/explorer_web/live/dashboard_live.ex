@@ -54,7 +54,7 @@ defmodule ExplorerWeb.DashboardLive do
       </h2>
     </div>
 
-    <div class="block md:block relative rounded-xl overflow-auto">
+    <div class="block md:block relative overflow-auto">
       <table class="border-collapse table-auto w-full text-xs md:text-sm">
         <thead>
           <tr>
