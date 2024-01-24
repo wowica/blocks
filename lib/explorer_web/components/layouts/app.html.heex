@@ -13,16 +13,17 @@
   </div>
 </header>
 
-
-
 <header class="sm:block md:hidden p-2">
-  <div class="sm:hidden border-b border-zinc-100" id="mobile-menu">
-    <div class="space-x-15 mb-3 flex items-center">
+  <div class="flex sm:hidden border-b border-zinc-100" id="mobile-menu">
+    <div class="flex-grow space-x-15 mb-3 flex items-center gap-2">
       <.cardano_logo />
       <span class="font-bold ml-2">Cardano Blocks</span>
       <p class="text-[#50fa7b] text-xs ml-3">
         <i>by <a href="https://github.com/wowica" target="_blank">Work With Cardano</a></i>
       </p>
+    </div>
+    <div class="text-white mb-3">
+      <a href="https://github.com/wowica/explorer" target="_blank"><.github_logo /></a>
     </div>
   </div>
 </header>
@@ -30,13 +31,11 @@
 <main class="md:px-4 md:py-10 sm:px-6 lg:px-8">
   <div class="mx-auto max-w-3xl">
     <.flash_group flash={@flash} />
-
     <div class="flex flex-row justify-center mt-5">
       <h2 class="text-xl md:text-3xl mb-5 sm:mb-10 font-extrabold tracking-tight text-slate-200">
         Latest Blocks
       </h2>
     </div>
-
     <%= @inner_content %>
   </div>
 </main>
