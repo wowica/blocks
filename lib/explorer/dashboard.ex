@@ -49,7 +49,8 @@ defmodule Explorer.Dashboard do
       issuer: block["issuer"],
       tx_count: Enum.count(block["transactions"]),
       ada_output: ada_output,
-      fees: fees
+      fees: fees,
+      is_real_time: true
     }
 
     all_blocks = BlocksDb.get_all_blocks()
