@@ -48,12 +48,6 @@ defmodule ExplorerWeb.DashboardLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="flex flex-row justify-center mb-10 mt-5">
-      <h2 class="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight text-slate-200">
-        Latest Blocks
-      </h2>
-    </div>
-
     <div class="block md:block relative overflow-auto">
       <table class="border-collapse table-auto w-full text-xs md:text-sm">
         <thead>
