@@ -11,7 +11,9 @@ defmodule Explorer.ChainSyncClient do
 
   @impl true
   def handle_block(block, state) do
-    Dashboard.broadcast_new_block(block)
+    {new_block, block_to_be_removed} = Dashboard.update_blocks_db(block)
+    Dashboard.broadcast_new_block(new_block, block_to_be_removed)
+
     {:ok, :next_block, state}
   end
 end
