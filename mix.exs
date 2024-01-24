@@ -49,7 +49,7 @@ defmodule Explorer.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:heroicons, "~> 0.5.0"},
-      {:xogmios, github: "wowica/xogmios", branch: "fix-disconnect"},
+      {:xogmios, github: "wowica/xogmios", ref: "bb08ab8"},
       {:decimal, "~> 2.1"}
     ]
   end
