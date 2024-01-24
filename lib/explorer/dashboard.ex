@@ -50,6 +50,7 @@ defmodule Explorer.Dashboard do
       tx_count: Enum.count(block["transactions"]),
       ada_output: ada_output,
       fees: fees,
+      date_time: time_now_utc(),
       is_real_time: true
     }
 
@@ -60,5 +61,11 @@ defmodule Explorer.Dashboard do
     BlocksDb.add_block(new_block)
 
     {new_block, block_to_be_removed}
+  end
+
+  defp time_now_utc do
+    DateTime.now!("Etc/UTC")
+    |> DateTime.to_string()
+    |> String.slice(0..18)
   end
 end
