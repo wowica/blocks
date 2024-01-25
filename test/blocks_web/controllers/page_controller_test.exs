@@ -1,5 +1,5 @@
-defmodule ExplorerWeb.PageControllerTest do
-  use ExplorerWeb.ConnCase
+defmodule BlocksWeb.PageControllerTest do
+  use BlocksWeb.ConnCase
 
   test "GET /", %{conn: conn} do
     conn = get(conn, ~p"/")

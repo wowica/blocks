@@ -1,6 +1,6 @@
-defmodule Explorer do
+defmodule Blocks do
   @moduledoc """
-  Explorer keeps the contexts that define your domain
+  Blocks keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

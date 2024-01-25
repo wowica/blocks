@@ -1,7 +1,7 @@
-defmodule Explorer.Dashboard do
-  alias Explorer.BlocksDb
+defmodule Blocks.Dashboard do
+  alias Blocks.BlocksDb
 
-  @pub_sub Explorer.PubSub
+  @pub_sub Blocks.PubSub
   @new_blocks "new-blocks"
 
   def subscribe() do

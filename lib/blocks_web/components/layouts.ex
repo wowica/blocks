@@ -1,5 +1,5 @@
-defmodule ExplorerWeb.Layouts do
-  use ExplorerWeb, :html
+defmodule BlocksWeb.Layouts do
+  use BlocksWeb, :html
 
   embed_templates "layouts/*"
 

@@ -1,12 +1,12 @@
-defmodule ExplorerWeb do
+defmodule BlocksWeb do
   @moduledoc """
   The entrypoint for defining your web interface, such
   as controllers, components, channels, and so on.
 
   This can be used in your application as:
 
-      use ExplorerWeb, :controller
-      use ExplorerWeb, :html
+      use BlocksWeb, :controller
+      use BlocksWeb, :html
 
   The definitions below will be executed for every controller,
   component, etc, so keep them short and clean, focused
@@ -40,10 +40,10 @@ defmodule ExplorerWeb do
     quote do
       use Phoenix.Controller,
         formats: [:html, :json],
-        layouts: [html: ExplorerWeb.Layouts]
+        layouts: [html: BlocksWeb.Layouts]
 
       import Plug.Conn
-      import ExplorerWeb.Gettext
+      import BlocksWeb.Gettext
 
       unquote(verified_routes())
     end
@@ -52,7 +52,7 @@ defmodule ExplorerWeb do
   def live_view do
     quote do
       use Phoenix.LiveView,
-        layout: {ExplorerWeb.Layouts, :app}
+        layout: {BlocksWeb.Layouts, :app}
 
       unquote(html_helpers())
     end
@@ -84,8 +84,8 @@ defmodule ExplorerWeb do
       # HTML escaping functionality
       import Phoenix.HTML
       # Core UI components and translation
-      import ExplorerWeb.CoreComponents
-      import ExplorerWeb.Gettext
+      import BlocksWeb.CoreComponents
+      import BlocksWeb.Gettext
 
       # Shortcut for generating JS commands
       alias Phoenix.LiveView.JS
@@ -98,9 +98,9 @@ defmodule ExplorerWeb do
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
-        endpoint: ExplorerWeb.Endpoint,
-        router: ExplorerWeb.Router,
-        statics: ExplorerWeb.static_paths()
+        endpoint: BlocksWeb.Endpoint,
+        router: BlocksWeb.Router,
+        statics: BlocksWeb.static_paths()
     end
   end
 

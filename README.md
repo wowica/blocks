@@ -1,6 +1,6 @@
-# Explorer
+# Blocks
 
-A Cardano Block explorer written in Phoenix LiveView.
+A simple Cardano Blockchain explorer written in [Phoenix LiveView](https://www.phoenixframework.org/) and using [Xogmios](https://github.com/wowica/xogmios).
 
   * Run `mix setup` to install and setup dependencies
   * Populate the `OGMIOS_URL` environment variable with the access url for [Ogmios](https://ogmios.dev/).

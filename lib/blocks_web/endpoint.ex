@@ -1,12 +1,12 @@
-defmodule ExplorerWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :explorer
+defmodule BlocksWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :blocks
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
   # Set :encryption_salt if you would also like to encrypt it.
   @session_options [
     store: :cookie,
-    key: "_explorer_key",
+    key: "_blocks_key",
     signing_salt: "+OlJNXtz",
     same_site: "Lax"
   ]
@@ -19,9 +19,9 @@ defmodule ExplorerWeb.Endpoint do
   # when deploying your static files in production.
   plug Plug.Static,
     at: "/",
-    from: :explorer,
+    from: :blocks,
     gzip: false,
-    only: ExplorerWeb.static_paths()
+    only: BlocksWeb.static_paths()
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -46,5 +46,5 @@ defmodule ExplorerWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
   plug Plug.Session, @session_options
-  plug ExplorerWeb.Router
+  plug BlocksWeb.Router
 end

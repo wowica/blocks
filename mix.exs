@@ -1,9 +1,9 @@
-defmodule Explorer.MixProject do
+defmodule Blocks.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :explorer,
+      app: :blocks,
       version: "0.1.0",
       elixir: "~> 1.14",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -18,7 +18,7 @@ defmodule Explorer.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {Explorer.Application, []},
+      mod: {Blocks.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end
@@ -50,7 +50,8 @@ defmodule Explorer.MixProject do
       {:plug_cowboy, "~> 2.5"},
       {:heroicons, "~> 0.5.0"},
       {:xogmios, github: "wowica/xogmios", ref: "102a2a8"},
-      {:decimal, "~> 2.1"}
+      {:decimal, "~> 2.1"},
+      {:rename, "~> 0.1.0"}
     ]
   end
 

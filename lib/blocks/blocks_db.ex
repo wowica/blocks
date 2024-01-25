@@ -1,4 +1,4 @@
-defmodule Explorer.BlocksDb do
+defmodule Blocks.BlocksDb do
   @moduledoc """
   This module is the in-memory database for blocks
   """
