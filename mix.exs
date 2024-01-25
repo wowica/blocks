@@ -49,7 +49,7 @@ defmodule Explorer.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:heroicons, "~> 0.5.0"},
-      {:xogmios, github: "wowica/xogmios", ref: "a851d98"},
+      {:xogmios, github: "wowica/xogmios", ref: "102a2a8"},
       {:decimal, "~> 2.1"}
     ]
   end

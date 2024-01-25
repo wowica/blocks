@@ -67,13 +67,19 @@ defmodule ExplorerWeb.DashboardLive do
             <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
               Fees
             </th>
+            <th class="hidden sm:block border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
+              Date/Time (UTC)
+            </th>
           </tr>
         </thead>
         <tbody id="blocks" phx-update="stream">
           <tr
             :for={{dom_id, block} <- assigns.streams.blocks}
             id={dom_id}
-            class="bg-slate-800 hover:bg-slate-700 animate-fadeIn"
+            class={[
+              "bg-slate-800 hover:bg-slate-700",
+              if(block[:is_real_time], do: "animate-fadeIn")
+            ]}
           >
             <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
               <%= block.block_height %>
@@ -89,6 +95,9 @@ defmodule ExplorerWeb.DashboardLive do
             </td>
             <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
               <%= block.fees %>
+            </td>
+            <td class="hidden sm:block border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
+              <%= block.date_time %>
             </td>
           </tr>
         </tbody>

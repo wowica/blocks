@@ -9,6 +9,8 @@ defmodule Explorer.Dashboard do
   end
 
   def broadcast_new_block(new_block, block_to_be_removed) do
+    # Set this flag for animate-fadeIn
+    new_block = Map.merge(new_block, %{is_real_time: true})
     Phoenix.PubSub.broadcast(@pub_sub, @new_blocks, {:new_block, new_block, block_to_be_removed})
   end
 
@@ -49,15 +51,24 @@ defmodule Explorer.Dashboard do
       issuer: block["issuer"],
       tx_count: Enum.count(block["transactions"]),
       ada_output: ada_output,
-      fees: fees
+      fees: fees,
+      date_time: date_time_utc()
     }
 
     all_blocks = BlocksDb.get_all_blocks()
-    # First, get the oldest / @max_blocks_per_page-nth block on the db
+    # Get the @max_blocks_per_page-nth block on the db
+    # so it can be removed from the table display. This might
+    # be nil while BlockDb is still building up to @max_blocks_per_page
     block_to_be_removed = Enum.at(all_blocks, @max_blocks_per_page - 1)
 
     BlocksDb.add_block(new_block)
 
     {new_block, block_to_be_removed}
+  end
+
+  defp date_time_utc do
+    DateTime.now!("Etc/UTC")
+    |> DateTime.to_string()
+    |> String.slice(0..18)
   end
 end
