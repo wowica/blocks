@@ -78,7 +78,7 @@ defmodule ExplorerWeb.DashboardLive do
             id={dom_id}
             class={[
               "bg-slate-800 hover:bg-slate-700",
-              if(block[:is_real_time], do: " animate-fadeIn")
+              if(block[:is_real_time], do: "animate-fadeIn")
             ]}
           >
             <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
