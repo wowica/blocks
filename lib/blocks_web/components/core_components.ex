@@ -1,4 +1,4 @@
-defmodule ExplorerWeb.CoreComponents do
+defmodule BlocksWeb.CoreComponents do
   @moduledoc """
   Provides core UI components.
 
@@ -17,7 +17,7 @@ defmodule ExplorerWeb.CoreComponents do
   use Phoenix.Component
 
   alias Phoenix.LiveView.JS
-  import ExplorerWeb.Gettext
+  import BlocksWeb.Gettext
 
   @doc """
   Renders a modal.
@@ -659,9 +659,9 @@ defmodule ExplorerWeb.CoreComponents do
     # with our gettext backend as first argument. Translations are
     # available in the errors.po file (as we use the "errors" domain).
     if count = opts[:count] do
-      Gettext.dngettext(ExplorerWeb.Gettext, "errors", msg, msg, count, opts)
+      Gettext.dngettext(BlocksWeb.Gettext, "errors", msg, msg, count, opts)
     else
-      Gettext.dgettext(ExplorerWeb.Gettext, "errors", msg, opts)
+      Gettext.dgettext(BlocksWeb.Gettext, "errors", msg, opts)
     end
   end
 

@@ -1,7 +1,7 @@
-defmodule Explorer.ChainSyncClient do
+defmodule Blocks.ChainSyncClient do
   use Xogmios, :chain_sync
 
-  alias Explorer.Dashboard
+  alias Blocks.Dashboard
 
   require Logger
 

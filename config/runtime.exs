@@ -12,12 +12,12 @@ import Config
 # If you use `mix release`, you need to explicitly enable the server
 # by passing the PHX_SERVER=true when you start it:
 #
-#     PHX_SERVER=true bin/explorer start
+#     PHX_SERVER=true bin/blocks start
 #
 # Alternatively, you can use `mix phx.gen.release` to generate a `bin/server`
 # script that automatically sets the env var above.
 if System.get_env("PHX_SERVER") do
-  config :explorer, ExplorerWeb.Endpoint, server: true
+  config :blocks, BlocksWeb.Endpoint, server: true
 end
 
 if config_env() == :prod do
@@ -33,13 +33,13 @@ if config_env() == :prod do
       You can generate one by calling: mix phx.gen.secret
       """
 
-  config :explorer, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
+  config :blocks, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   phx_host = System.fetch_env!("PHX_HOST")
   phx_port = String.to_integer(System.get_env("PHX_PORT", "443"))
   phx_scheme = System.get_env("PHX_SCHEME", "https")
 
-  config :explorer, ExplorerWeb.Endpoint,
+  config :blocks, BlocksWeb.Endpoint,
     url: [host: phx_host, port: phx_port, scheme: phx_scheme],
     # http: [
     #   # Enable IPv6 and bind on all interfaces.
@@ -58,7 +58,7 @@ if config_env() == :prod do
   # To get SSL working, you will need to add the `https` key
   # to your endpoint configuration:
   #
-  #     config :explorer, ExplorerWeb.Endpoint,
+  #     config :blocks, BlocksWeb.Endpoint,
   #       https: [
   #         ...,
   #         port: 443,
@@ -80,7 +80,7 @@ if config_env() == :prod do
   # We also recommend setting `force_ssl` in your endpoint, ensuring
   # no data is ever sent via http, always redirecting to https:
   #
-  #     config :explorer, ExplorerWeb.Endpoint,
+  #     config :blocks, BlocksWeb.Endpoint,
   #       force_ssl: [hsts: true]
   #
   # Check `Plug.SSL` for all available options in `force_ssl`.
@@ -91,7 +91,7 @@ if config_env() == :prod do
   # Also, you may need to configure the Swoosh API client of your choice if you
   # are not using SMTP. Here is an example of the configuration:
   #
-  #     config :explorer, Explorer.Mailer,
+  #     config :blocks, Blocks.Mailer,
   #       adapter: Swoosh.Adapters.Mailgun,
   #       api_key: System.get_env("MAILGUN_API_KEY"),
   #       domain: System.get_env("MAILGUN_DOMAIN")

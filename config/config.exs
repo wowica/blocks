@@ -7,18 +7,18 @@
 # General application configuration
 import Config
 
-config :explorer,
+config :blocks,
   generators: [timestamp_type: :utc_datetime]
 
 # Configures the endpoint
-config :explorer, ExplorerWeb.Endpoint,
+config :blocks, BlocksWeb.Endpoint,
   url: [host: "localhost"],
   adapter: Phoenix.Endpoint.Cowboy2Adapter,
   render_errors: [
-    formats: [html: ExplorerWeb.ErrorHTML, json: ExplorerWeb.ErrorJSON],
+    formats: [html: BlocksWeb.ErrorHTML, json: BlocksWeb.ErrorJSON],
     layout: false
   ],
-  pubsub_server: Explorer.PubSub,
+  pubsub_server: Blocks.PubSub,
   live_view: [signing_salt: "leVEXctk"]
 
 # Configures the mailer
@@ -28,7 +28,7 @@ config :explorer, ExplorerWeb.Endpoint,
 #
 # For production it's recommended to configure a different adapter
 # at the `config/runtime.exs`.
-config :explorer, Explorer.Mailer, adapter: Swoosh.Adapters.Local
+config :blocks, Blocks.Mailer, adapter: Swoosh.Adapters.Local
 
 # Configure esbuild (the version is required)
 config :esbuild,

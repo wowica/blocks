@@ -1,5 +1,5 @@
-defmodule ExplorerWeb.PageController do
-  use ExplorerWeb, :controller
+defmodule BlocksWeb.PageController do
+  use BlocksWeb, :controller
 
   def home(conn, _params) do
     # The home page is often custom made,

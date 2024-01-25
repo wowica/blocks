@@ -1,7 +1,7 @@
-defmodule ExplorerWeb.DashboardLive do
-  use ExplorerWeb, :live_view
+defmodule BlocksWeb.DashboardLive do
+  use BlocksWeb, :live_view
 
-  alias Explorer.Dashboard
+  alias Blocks.Dashboard
 
   @impl true
   def mount(_params, _session, socket) do
