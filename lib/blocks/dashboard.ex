@@ -30,7 +30,6 @@ defmodule Blocks.Dashboard do
       block["transactions"]
       |> Stream.flat_map(fn tx -> tx["outputs"] end)
       |> Stream.map(fn output -> output["value"]["ada"]["lovelace"] end)
-      |> Stream.filter(& &1)
       |> Enum.sum()
       |> Decimal.div(1_000_000)
       |> Decimal.round(4)
@@ -38,9 +37,8 @@ defmodule Blocks.Dashboard do
 
     fees =
       Stream.map(block["transactions"], fn tx ->
-        tx["fee"]["lovelace"]
+        tx["fee"]["ada"]["lovelace"]
       end)
-      |> Stream.filter(& &1)
       |> Enum.sum()
       |> Decimal.div(1_000_000)
       |> Decimal.round(4)
