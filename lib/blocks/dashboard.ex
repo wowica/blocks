@@ -22,8 +22,6 @@ defmodule Blocks.Dashboard do
   @type new_block :: map()
   @type block_to_be_removed :: map()
 
-  @max_blocks_per_page 10
-
   @spec update_blocks_db(block_from_xogmios :: map()) :: {new_block, block_to_be_removed}
   def update_blocks_db(block) do
     ada_output =
@@ -55,13 +53,7 @@ defmodule Blocks.Dashboard do
       date_time: date_time_utc()
     }
 
-    all_blocks = BlocksDb.get_all_blocks()
-    # Get the @max_blocks_per_page-nth block on the db
-    # so it can be removed from the table display. This might
-    # be nil while BlockDb is still building up to @max_blocks_per_page
-    block_to_be_removed = Enum.at(all_blocks, @max_blocks_per_page - 1)
-
-    BlocksDb.add_block(new_block)
+    block_to_be_removed = BlocksDb.add_block(new_block)
 
     {new_block, block_to_be_removed}
   end

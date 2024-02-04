@@ -65,7 +65,7 @@ defmodule BlocksWeb.DashboardLive do
               ADA Output
             </th>
             <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
-              Fees
+              ADA Fees
             </th>
             <th class="hidden sm:block border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
               Date/Time (UTC)
