@@ -49,7 +49,7 @@ defmodule Blocks.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:heroicons, "~> 0.5.0"},
-      {:xogmios, github: "wowica/xogmios", ref: "102a2a8"},
+      {:xogmios, "~> 0.1.0"},
       {:decimal, "~> 2.1"},
       {:rename, "~> 0.1.0"}
     ]
