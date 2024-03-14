@@ -8,10 +8,10 @@ defmodule Blocks.Dashboard do
     Phoenix.PubSub.subscribe(@pub_sub, @new_blocks)
   end
 
-  def broadcast_new_block(new_block, block_to_be_removed) do
+  def broadcast_new_block(new_block) do
     # Set this flag for animate-fadeIn
     new_block = Map.merge(new_block, %{is_real_time: true})
-    Phoenix.PubSub.broadcast(@pub_sub, @new_blocks, {:new_block, new_block, block_to_be_removed})
+    Phoenix.PubSub.broadcast(@pub_sub, @new_blocks, {:new_block, new_block})
   end
 
   @spec load_existing_blocks() :: list()
@@ -22,8 +22,11 @@ defmodule Blocks.Dashboard do
   @type new_block :: map()
   @type block_to_be_removed :: map()
 
-  @spec update_blocks_db(block_from_xogmios :: map()) :: {new_block, block_to_be_removed}
-  def update_blocks_db(block) do
+  @doc """
+  Builds the block map, adds to the db and invokes callback with the new block.
+  """
+  @spec update_blocks_db(block_from_xogmios :: map(), callback :: fun()) :: :ok
+  def update_blocks_db(block, callback) do
     ada_output =
       block["transactions"]
       |> Stream.flat_map(fn tx -> tx["outputs"] end)
@@ -53,9 +56,10 @@ defmodule Blocks.Dashboard do
       date_time: date_time_utc()
     }
 
-    block_to_be_removed = BlocksDb.add_block(new_block)
+    _ = BlocksDb.add_block(new_block)
+    callback.(new_block)
 
-    {new_block, block_to_be_removed}
+    :ok
   end
 
   defp date_time_utc do

@@ -3,6 +3,8 @@ defmodule BlocksWeb.DashboardLive do
 
   alias Blocks.Dashboard
 
+  @table_limit 10
+
   @impl true
   def mount(_params, _session, socket) do
     if connected?(socket) do
@@ -23,19 +25,10 @@ defmodule BlocksWeb.DashboardLive do
   end
 
   @impl true
-  def handle_info({:new_block, new_block, block_to_be_removed}, socket) do
+  def handle_info({:new_block, new_block}, socket) do
     send(self(), :reset_counter)
 
-    new_socket =
-      socket
-      |> stream_insert(:blocks, new_block, at: 0)
-      |> then(fn socket ->
-        if block_to_be_removed do
-          stream_delete_by_dom_id(socket, :blocks, block_to_be_removed.block_id)
-        else
-          socket
-        end
-      end)
+    new_socket = stream_insert(socket, :blocks, new_block, at: 0, limit: @table_limit)
 
     {:noreply, new_socket}
   end
