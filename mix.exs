@@ -5,7 +5,7 @@ defmodule Blocks.MixProject do
     [
       app: :blocks,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.16",
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
@@ -49,7 +49,7 @@ defmodule Blocks.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:plug_cowboy, "~> 2.5"},
       {:heroicons, "~> 0.5.0"},
-      {:xogmios, "~> 0.2.0"},
+      {:xogmios, "~> 0.3.0"},
       {:decimal, "~> 2.1"},
       {:rename, "~> 0.1.0"}
     ]
