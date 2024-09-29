@@ -51,7 +51,9 @@ defmodule Blocks.MixProject do
       {:heroicons, "~> 0.5.0"},
       {:xogmios, "~> 0.4"},
       {:decimal, "~> 2.1"},
-      {:rename, "~> 0.1.0"}
+      {:rename, "~> 0.1.0"},
+      {:kino_vega_lite, "~> 0.1.11"},
+      {:vega_lite, "~> 0.1.9"}
     ]
   end
 
