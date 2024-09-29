@@ -1,6 +1,8 @@
 defmodule BlocksWeb.DashboardLive do
   use BlocksWeb, :live_view
 
+  alias VegaLite, as: Vl
+
   alias Blocks.Dashboard
 
   @table_limit 10
@@ -38,10 +40,68 @@ defmodule BlocksWeb.DashboardLive do
     {:noreply, push_event(socket, "resetCounter", %{})}
   end
 
+  defp vega_lite_ada_output_spec() do
+    blocks = Dashboard.load_existing_blocks()
+
+    Vl.new(
+      title: [text: "ADA Output versus Tx Count and ADA Fees", color: "#ffffff"],
+      width: 400,
+      height: 200,
+      padding: 5,
+      color: "#fffff"
+    )
+    |> Vl.data_from_values(blocks)
+    |> Vl.encode_field(:x, "block_height",
+      type: :nominal,
+      axis: [grid: false, label_color: "#94a3b8", title_color: "#ffffff"],
+      title: "Block (Height)"
+    )
+    |> Vl.layers([
+      Vl.new()
+      |> Vl.mark(:bar, tooltip: true, color: "#85C5A6")
+      |> Vl.encode_field(:y, "ada_output",
+        type: :quantitative,
+        format: ".1f",
+        axis: [grid: false, ticks: false, labels: false, title_color: "#ffffff", domain: false],
+        title: "ADA Output",
+        color: "#ffffff"
+      ),
+      Vl.new()
+      |> Vl.mark(:line, point: true, tooltip: true)
+      |> Vl.encode_field(:y, "tx_count",
+        type: :quantitative,
+        axis: [grid: false, ticks: false, labels: false, title: false, domain: false],
+        title: "Tx Count"
+      ),
+      Vl.new()
+      |> Vl.mark(:line, point: true, tooltip: true)
+      |> Vl.encode_field(:y, "fees",
+        type: :quantitative,
+        format: ".1f",
+        axis: [grid: false, ticks: false, labels: false, title: false, domain: false],
+        title: "ADA Fees"
+      )
+    ])
+    |> Vl.resolve(:scale, y: :independent)
+    |> Vl.config(view: [stroke: :transparent], background: :transparent)
+    |> Vl.to_spec()
+  end
+
   @impl true
   def render(assigns) do
     ~H"""
     <div class="block md:block relative overflow-auto">
+      <div class="flex my-10">
+        <div class="flex-1 bg-slate-800 shadow-md rounded-lg">
+          <.live_component
+            module={BlocksWeb.VegaLiteComponent}
+            id="example-2"
+            spec={vega_lite_ada_output_spec()}
+          />
+        </div>
+        <div class="flex-1"></div>
+      </div>
+
       <table class="border-collapse table-auto w-full text-xs md:text-sm">
         <thead>
           <tr>
