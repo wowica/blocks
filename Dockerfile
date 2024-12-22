@@ -5,14 +5,14 @@
 # https://hub.docker.com/_/ubuntu?tab=tags
 # https://hub.docker.com/r/hexpm/elixir/tags - for the build image
 
-ARG ELIXIR_VERSION=1.16.2
-ARG OTP_VERSION=25.3.2.10
-ARG DEBIAN_VERSION=buster-20240130-slim
+ARG ELIXIR_VERSION=1.18.0
+ARG OTP_VERSION=27.2
+ARG DEBIAN_VERSION=buster-20240612-slim
 
 ARG BUILDER_IMAGE="hexpm/elixir:${ELIXIR_VERSION}-erlang-${OTP_VERSION}-debian-${DEBIAN_VERSION}"
 ARG RUNNER_IMAGE="debian:${DEBIAN_VERSION}"
 
-FROM ${BUILDER_IMAGE} as builder
+FROM ${BUILDER_IMAGE} AS builder
 
 RUN apt-get update && apt-get install -y curl \
     && curl -sL https://deb.nodesource.com/setup_20.x | bash - && apt-get install -y nodejs
@@ -72,9 +72,9 @@ RUN apt-get update -y && \
 # Set the locale
 RUN sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && locale-gen
 
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
 
 WORKDIR "/app"
 RUN chown nobody /app
