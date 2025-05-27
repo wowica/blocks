@@ -56,8 +56,6 @@ defmodule Blocks.Dashboard do
       date_time: date_time_utc()
     }
 
-    IO.inspect(new_block, label: "NEW BLOCK")
-
     _ = BlocksDb.add_block(new_block)
     callback.(new_block)
 
