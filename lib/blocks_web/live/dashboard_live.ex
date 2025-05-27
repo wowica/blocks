@@ -41,27 +41,30 @@ defmodule BlocksWeb.DashboardLive do
   @impl true
   def render(assigns) do
     ~H"""
-    <div class="block md:block relative overflow-auto">
-      <table class="border-collapse table-auto w-full text-xs md:text-sm">
+    <div class="block md:block relative overflow-auto max-w-[95vw] md:max-w-[90vw] lg:max-w-[85vw] mx-auto">
+      <table class="border-collapse table-auto w-full min-w-[800px] md:min-w-[1000px] lg:min-w-[1200px]">
         <thead>
           <tr>
-            <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
-              Block (Height)
+            <th class="border-b border-slate-600 text-[10px] font-normal sm:text-sm md:text-base md:font-medium p-2 pt-0 pb-3 text-center">
+              Height
             </th>
-            <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
-              Size (Kb)
+            <th class="border-b border-slate-600 text-[10px] font-normal sm:text-sm md:text-base md:font-medium p-2 pt-0 pb-3 text-center">
+              Block Hash
             </th>
-            <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
+            <th class="border-b border-slate-600 text-[10px] font-normal sm:text-sm md:text-base md:font-medium p-2 pt-0 pb-3 text-center">
+              Slot
+            </th>
+            <th class="border-b border-slate-600 text-[10px] font-normal sm:text-sm md:text-base md:font-medium p-2 pt-0 pb-3 text-center">
+              Size (kb)
+            </th>
+            <th class="border-b border-slate-600 text-[10px] font-normal sm:text-sm md:text-base md:font-medium p-2 pt-0 pb-3 text-center">
               Tx Count
             </th>
-            <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
-              ADA Output
+            <th class="border-b border-slate-600 text-[10px] font-normal sm:text-sm md:text-base md:font-medium p-2 pt-0 pb-3 text-center">
+              ADA Output / Fees
             </th>
-            <th class="border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
-              ADA Fees
-            </th>
-            <th class="hidden sm:block border-b border-slate-600 font-medium p-2 pt-0 pb-3 text-center">
-              Date/Time (UTC)
+            <th class="border-b border-slate-600 text-[10px] font-normal sm:text-sm md:text-base md:font-medium p-2 pt-0 pb-3 text-center">
+              Date / Time (UTC)
             </th>
           </tr>
         </thead>
@@ -74,22 +77,35 @@ defmodule BlocksWeb.DashboardLive do
               if(block[:is_real_time], do: "animate-fadeIn")
             ]}
           >
-            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
+            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center sm:text-sm md:text-base md:font-medium">
               <%= block.block_height %>
             </td>
-            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
+
+            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center sm:text-sm md:text-base md:font-medium">
+              <span class="text-[11px] text-slate-400">
+                <%= String.slice(block.block_id, 0, 6) <>
+                  "..." <> String.slice(block.block_id, -6, 6) %>
+                <Heroicons.clipboard_document_list
+                  class="inline-block w-4 h-4 ml-1 cursor-pointer hover:text-slate-300"
+                  phx-hook="clipboard"
+                  data-clipboard-text={block.block_id}
+                />
+              </span>
+            </td>
+
+            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center sm:text-sm md:text-base md:font-medium">
+              <%= block.block_slot %>
+            </td>
+            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center sm:text-sm md:text-base md:font-medium">
               <%= block.block_size %>
             </td>
-            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
+            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center sm:text-sm md:text-base md:font-medium">
               <%= block.tx_count %>
             </td>
-            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
-              <%= block.ada_output %>
+            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center sm:text-sm md:text-base md:font-medium">
+              <%= block.ada_output %> / <%= block.fees %>
             </td>
-            <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
-              <%= block.fees %>
-            </td>
-            <td class="hidden sm:block border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center">
+            <td class="border-b border-slate-100 border-slate-700 p-3 text-slate-400 text-center sm:text-sm md:text-base md:font-medium">
               <%= block.date_time %>
             </td>
           </tr>

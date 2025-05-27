@@ -25,6 +25,22 @@ import topbar from "../vendor/topbar"
 let Hooks = {}
 const lastUpdatedElements = document.getElementsByClassName("last-updated")
 
+Hooks.clipboard = {
+  mounted() {
+    this.el.addEventListener("click", () => {
+      const text = this.el.getAttribute("data-clipboard-text")
+      navigator.clipboard.writeText(text).then(() => {
+        // Visual feedback
+        const originalColor = this.el.style.color
+        this.el.style.color = "#10B981" // Green color for success
+        setTimeout(() => {
+          this.el.style.color = originalColor
+        }, 1000)
+      })
+    })
+  }
+}
+
 Hooks.timer = {
   mounted() {
     this.secondsAgo = 0;

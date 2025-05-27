@@ -51,7 +51,8 @@ defmodule Blocks.MixProject do
       {:heroicons, "~> 0.5.0"},
       {:xogmios, "~> 0.4"},
       {:decimal, "~> 2.1"},
-      {:rename, "~> 0.1.0"}
+      {:rename, "~> 0.1.0"},
+      {:number, "~> 1.0"}
     ]
   end
 

@@ -33,8 +33,7 @@ defmodule Blocks.Dashboard do
       |> Stream.map(fn output -> output["value"]["ada"]["lovelace"] end)
       |> Enum.sum()
       |> Decimal.div(1_000_000)
-      |> Decimal.round(4)
-      |> to_string()
+      |> Number.Delimit.number_to_delimited(precision: 0)
 
     fees =
       Stream.map(block["transactions"], fn tx ->
@@ -42,19 +41,22 @@ defmodule Blocks.Dashboard do
       end)
       |> Enum.sum()
       |> Decimal.div(1_000_000)
-      |> Decimal.round(4)
+      |> Decimal.round(2)
       |> to_string()
 
     new_block = %{
       block_id: block["id"],
       block_size: Decimal.div(block["size"]["bytes"], 1000) |> Decimal.round(1) |> to_string,
       block_height: block["height"],
+      block_slot: block["slot"],
       issuer: block["issuer"],
       tx_count: Enum.count(block["transactions"]),
       ada_output: ada_output,
       fees: fees,
       date_time: date_time_utc()
     }
+
+    IO.inspect(new_block, label: "NEW BLOCK")
 
     _ = BlocksDb.add_block(new_block)
     callback.(new_block)
