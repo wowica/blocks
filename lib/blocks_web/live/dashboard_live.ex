@@ -88,6 +88,7 @@ defmodule BlocksWeb.DashboardLive do
                 <Heroicons.clipboard_document_list
                   class="inline-block w-4 h-4 ml-1 cursor-pointer hover:text-slate-300"
                   phx-hook="clipboard"
+                  id={"clipboard-#{block.block_id}"}
                   data-clipboard-text={block.block_id}
                 />
               </span>
