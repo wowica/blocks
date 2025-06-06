@@ -25,7 +25,7 @@ defmodule Blocks.ChainSyncClient do
   end
 
   @impl true
-  def handle_rollback(%{slot: slot} = _point, state) do
+  def handle_rollback(%{"slot" => slot} = _point, state) do
     Dashboard.rollback_to_slot(slot)
 
     {:ok, :next_block, state}
