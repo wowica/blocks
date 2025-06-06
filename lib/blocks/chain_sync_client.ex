@@ -14,7 +14,14 @@ defmodule Blocks.ChainSyncClient do
   require Logger
 
   def start_link(opts) do
-    Xogmios.start_chain_sync_link(__MODULE__, opts)
+    if Keyword.get(opts, :url) do
+      Xogmios.start_chain_sync_link(__MODULE__, opts)
+    else
+      # During test runs, this module should NOT be
+      # automatically started upon application boot and
+      # instead started with start_supervised/2
+      :ignore
+    end
   end
 
   @impl true
