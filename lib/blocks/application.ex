@@ -28,6 +28,6 @@ defmodule Blocks.Application do
   end
 
   defp ogmios_connection_url() do
-    System.fetch_env!("OGMIOS_URL")
+    Application.get_env(:blocks, :ogmios_url)
   end
 end

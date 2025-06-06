@@ -17,7 +17,7 @@ defmodule BlocksWeb.DashboardLive do
       stream_configure(
         socket,
         :blocks,
-        dom_id: &"#{&1.block_id}"
+        dom_id: &"#{&1.block_slot}"
       )
       |> stream(:blocks, blocks)
 
@@ -31,6 +31,23 @@ defmodule BlocksWeb.DashboardLive do
     new_socket = stream_insert(socket, :blocks, new_block, at: 0, limit: @table_limit)
 
     {:noreply, new_socket}
+  end
+
+  @impl true
+  def handle_info({:rollback, blocks_to_remove}, socket) do
+    send(self(), :reset_counter)
+
+    new_socket =
+      Enum.reduce(blocks_to_remove, socket, fn block, acc ->
+        stream_delete(acc, :blocks, block)
+      end)
+
+    {:noreply,
+     put_flash(
+       new_socket,
+       :notice,
+       "Rolled back #{Enum.count(blocks_to_remove)} blocks"
+     )}
   end
 
   @impl true
@@ -74,7 +91,7 @@ defmodule BlocksWeb.DashboardLive do
             id={dom_id}
             class={[
               "bg-slate-800 hover:bg-slate-700",
-              if(block[:is_real_time], do: "animate-fadeIn")
+              if(block.is_real_time, do: "animate-fadeIn")
             ]}
           >
             <td class="border-b border-slate-100 border-slate-700 p-2 text-slate-400 text-center sm:text-sm md:text-base md:font-medium">
