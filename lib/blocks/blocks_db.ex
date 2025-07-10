@@ -5,6 +5,8 @@ defmodule Blocks.BlocksDb do
 
   use Agent
 
+  alias Blocks.Dashboard.Block
+
   @max_blocks 10
 
   def start_link(opts) do
@@ -16,7 +18,7 @@ defmodule Blocks.BlocksDb do
   Adds new block and returns oldest block (if any),
   to be removed from the page
   """
-  def add_block(pid \\ __MODULE__, block) do
+  def add_block(pid \\ __MODULE__, %Block{} = block) do
     Agent.get_and_update(pid, fn state ->
       new_state = [block | state]
 
@@ -26,6 +28,14 @@ defmodule Blocks.BlocksDb do
       else
         {nil, new_state}
       end
+    end)
+  end
+
+  def rollback_db(pid \\ __MODULE__, slot) do
+    Agent.get_and_update(pid, fn state ->
+      {entries_to_keep, entries_to_remove} = Enum.split_with(state, &(&1.block_slot <= slot))
+
+      {entries_to_remove, entries_to_keep}
     end)
   end
 
