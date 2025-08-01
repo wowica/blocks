@@ -87,7 +87,7 @@ defmodule BlocksWeb.DashboardLive do
         </thead>
         <tbody id="blocks" phx-update="stream">
           <tr
-            :for={{dom_id, block} <- assigns.streams.blocks}
+            :for={{dom_id, block} <- @streams.blocks}
             id={dom_id}
             class={[
               "bg-slate-800 hover:bg-slate-700",
