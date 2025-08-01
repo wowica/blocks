@@ -23,7 +23,6 @@ import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
 let Hooks = {}
-const lastUpdatedElements = document.getElementsByClassName("last-updated")
 
 Hooks.clipboard = {
   mounted() {
@@ -43,17 +42,16 @@ Hooks.clipboard = {
 
 Hooks.timer = {
   mounted() {
-    this.secondsAgo = 0;
+    const element = this.el;
+    let secondsAgo = 0;
 
     this.interval = setInterval(() => {
-      this.secondsAgo += 1;
-      for (let el of lastUpdatedElements) {
-        el.innerHTML = `${this.secondsAgo} seconds ago`;
-      }
+      secondsAgo += 1;
+      element.innerHTML = `${secondsAgo} seconds ago`;
     }, 1000);
 
     this.handleEvent("resetCounter", () => {
-      this.secondsAgo = 0;
+      secondsAgo = 0;
     });
   },
   destroyed() {
