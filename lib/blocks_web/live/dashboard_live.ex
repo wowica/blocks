@@ -7,9 +7,7 @@ defmodule BlocksWeb.DashboardLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    if connected?(socket) do
-      Dashboard.subscribe()
-    end
+    if connected?(socket), do: Dashboard.subscribe()
 
     blocks = Dashboard.load_existing_blocks()
 
@@ -28,7 +26,14 @@ defmodule BlocksWeb.DashboardLive do
   def handle_info({:new_block, new_block}, socket) do
     send(self(), :reset_counter)
 
-    new_socket = stream_insert(socket, :blocks, new_block, at: 0, limit: @table_limit)
+    new_socket =
+      stream_insert(
+        socket,
+        :blocks,
+        new_block,
+        at: 0,
+        limit: @table_limit
+      )
 
     {:noreply, new_socket}
   end
