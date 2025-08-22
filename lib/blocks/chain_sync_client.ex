@@ -11,8 +11,6 @@ defmodule Blocks.ChainSyncClient do
 
   alias Blocks.Dashboard
 
-  require Logger
-
   def start_link(opts) do
     if Keyword.get(opts, :url) do
       Xogmios.start_chain_sync_link(__MODULE__, opts)
